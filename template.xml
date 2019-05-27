@@ -1,0 +1,67 @@
+<template format="4"
+        revision="1"
+        name="MVVM Template"
+        description="Creates a new MVVM classes - Activity/Fragment/Dialog, ViewModel and Contract">
+ 
+    <category value="Other"/>
+ 
+    <parameter id="activityClass"
+        name="Class Name"
+        type="string"
+        constraints="class|unique|nonempty"
+        default="MainActivity"
+        suggest="${layoutToActivity(layoutName)}"
+        help="The class name you want, Login if you want to have LoginActivity, LoginViewModel and LoginContract"/>
+
+    <parameter id="classType"
+        name="ClassType"
+        type="enum"
+        default="activity"
+        help="Choose the type of class you want">
+            
+        <option id="activity">Activity</option>
+        <option id="fragment">Fragment</option>
+        <option id="dialog">Dialog</option>
+
+    </parameter>
+
+    <parameter id="directoryName"
+        name="Directory Name"
+        type="string"
+        suggest="${camelCaseToUnderscore(activityClass)}"
+        constraints="class|unique|nonempty"
+        help="The classes directory name"/>
+
+    <parameter id="layoutName"
+        name="Layout Name"
+        type="string"
+        suggest="${camelCaseToUnderscore(activityClass)}"
+        default="activity_main"
+        constraints="nonempty"
+        help="The layout like activity_login"/>
+
+    <parameter
+        id="hasRecyclerView"
+        default="false"
+        name="Has RecyclerView"
+        type="boolean" />
+
+    <parameter id="itemObject"
+        name="RecyclerView item type"
+        type="string"
+        visibility="hasRecyclerView"
+        constraints="class|unique"
+        help="The type of the list you want"/>
+
+    <parameter id="itemLayout"
+        name="RecyclerView item layout"
+        type="string"
+        visibility="hasRecyclerView"
+        default="item_"
+        help="The item layout name"/>
+    
+ 
+    <globals file="globals.xml.ftl" />
+    <execute file="recipe.xml.ftl" />
+ 
+</template>
